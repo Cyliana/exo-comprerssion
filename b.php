@@ -60,8 +60,8 @@ for($i = 0; $i<count($table); $i++)         // On compte le nombre d'éléments 
 
     $output = str_replace($table[$c],$c,$output);   // on remplace l'index de table[$c] par $c de la chaîne de caractère de output.
 }
-
-print_r($output);                           
+print("\n");  
+print_r('Compression de txt:'."\n".$output);                           
 print("\n");      
 
 //========================= Décompression =================================================
@@ -74,8 +74,8 @@ for($i = 0; $i <count($table); $i++)
 
     $decompress = str_replace($d,$table[$d],$decompress);
 }
-
-print_r('Décompression de output:'.$decompress);                           
+print("\n");
+print_r('Décompression de output:'."\n".$decompress);                           
 print("\n");
 
 ?>
