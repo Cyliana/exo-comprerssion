@@ -2,7 +2,7 @@
 
 // original
 
-$txt = "l'amour est toujours passion et désintéressé.
+$txt = "L'amour est toujours passion et désintéressé.
 Il n'est jamais jaloux.
 L'amour n'est ni prétentieux, ni orgueilleux.
 Il n'est jamais grossier, ni égoïste.
@@ -23,80 +23,59 @@ $input = str_replace("'",' ',$input);       //remplace les ' , les , et les . pa
 $input = str_replace(",",' ',$input);       
 $input = str_replace(".",' ',$input);      
 
-$mots = explode(' ', $input);               //decompose une chaîne et stock chaque mot dans ce dernier.
-$table = array();                           //Création d'un tableau dans la variable $table.
+$mots = explode(' ',$input);               //decompose une chaîne et stock chaque mot dans ce dernier.
 
-$ii = 0;                                    // variable $ii initialisée à laquelle on affect 0.
+//print_r(explode(' ', $input));
 
-for($i = 0 ; $i<count($mots); $i++)         //Boucle d'incrémentation/ count va compter tous les éléments du tableau contenu dans $mots et en retourner le nombre.
+$table = array();                           
+
+$ii = 0;                                
+
+for($i = 0 ; $i<count($mots); $i++)         //compte tous les éléments du tableau contenu dans $mots et en retourne le nombre.
 {
-    $found = false;                         // on definit found sur false.
-    foreach($table as $item)                // parcour le tableau $table et assigne la valeur à $item pour chaque itération.
+    $found = false;                         
+    foreach($table as $item)                // parcours le tableau $table et assigne la valeur à $item pour chaque itération.
     {
         if($mots[$i] == $item)              //Si la valeur incrémenté de $i dans $mots est égale a la valeur assignée à $item.
         {
             $found = true;                  //On passe found à TRUE.
         }
     }
-    if($found == false)                     //si $found est égal à false
+    if($found == false)                     //si on ne trouve pas de doublon 
     {
         $c = substr('0'.$ii,-2);            // On affecte à $c la valeur récupérée par substr qui met 0 + l'index récupérer par $ii et qui ensuite ne selectionne 
-        $table[$c] = $mots[$i];             // que les deux derniers caractères.ex = ( '0'+12 => 12). Ajoute a $table qui prend l'index numerique la valeur du mot contenu dans $mots
+        $table[$c] = $mots[$i];             // que les deux derniers caractères.ex = ( '0'+12 => 012 , -2 => 12). Ajoute a $table qui prend l'index numerique la valeur du mot contenu dans $mots
         $ii++;                              //
     }
 }
 
 print_r($table);                            
-//print("\n");                              
+print("\n");                              
 
-$output = $txt;                             //
+$output = $txt;                             //Affectation du texte contenu dans $txt à $output
 
-for($i = 0; $i<count($table); $i++)         //
+for($i = 0; $i<count($table); $i++)         // On compte le nombre d'éléments dans $table on en selectionne chaque element par son index(numérique) et on les remplacent par l'index numerique de 
 {
     $c = substr('0'.$i,-2);                 //
 
-    $output = str_replace($table[$c],$c,$output);   //
+    $output = str_replace($table[$c],$c,$output);   // on remplace l'index de table[$c] par $c de la chaîne de caractère de output.
 }
 
-print_r($output);                           //
-print("\n");                                //
+print_r($output);                           
+print("\n");      
 
- // Décompression
+//========================= Décompression =================================================
 
+$decompress = $output;
 
+for($i = 0; $i <count($table); $i++)    
+{     
+    $d = substr('0'.$i,-2); 
 
+    $decompress = str_replace($d,$table[$d],$decompress);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print_r('Décompression de output:'.$decompress);                           
+print("\n");
 
 ?>
